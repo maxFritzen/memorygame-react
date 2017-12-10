@@ -6,10 +6,11 @@ export default class Square extends React.Component {
 
   }
   render() {
+    const id = this.props.id;
     return (
         <button
-          id={this.props.id}
-          onClick={this.props.handleClick}
+          id={id}
+          onClick={() => this.props.onClick(id)}
           >{this.props.id}</button>
     )
   }
