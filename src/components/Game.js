@@ -11,7 +11,8 @@ export default class Game extends React.Component {
     super();
     this.state = {
       fail: false,
-      turn: 0,
+      turn: 1,
+      score: 0,
       pattern: [],
       clicked: [],
       highscore: [{
@@ -68,6 +69,9 @@ export default class Game extends React.Component {
     const result = this.state.pattern[index] === this.state.clicked[index] ? true : false;
     if (result) {
       if (this.state.clicked.length === this.state.pattern.length) {
+        this.setState((prevState) => {
+          return { score: prevState.score + 1 };
+        });
         this.createPattern();
       }
     } else {
@@ -94,7 +98,7 @@ export default class Game extends React.Component {
     const highscoreWorthy = this.state.highscoreWorthy;
     return (
       <div>
-        <p>Score: {this.state.turn}</p>
+        <p>Score: {this.state.score}</p>
         <p>Clicked: {this.state.clicked}</p>
         <p>Pattern: {this.state.pattern}</p>
         <Board
