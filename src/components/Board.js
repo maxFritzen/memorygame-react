@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Square from './Square';
 
 export default class Board extends React.Component {
@@ -69,7 +70,7 @@ export default class Board extends React.Component {
           </div>
         </div>
         <div>
-          
+
         </div>
       </div>
 
