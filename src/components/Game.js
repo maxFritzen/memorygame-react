@@ -76,7 +76,8 @@ export default class Game extends React.Component {
       }
     } else {
       // set turn to 1
-      this.checkIfHighscore(this.state.turn, this.state.highscore[this.state.highscore.length -1].score);
+      console.log(this.state.highscore[this.state.highscore.length -1].score);
+      this.checkIfHighscore(this.state.score, this.state.highscore[this.state.highscore.length -1].score);
       this.setState ({ turn: 1}, this.createPattern);
     }
   };
@@ -113,7 +114,7 @@ export default class Game extends React.Component {
           <Highscore highscore={this.state.highscore}/>
         </div>
         <div>
-          {highscoreWorthy && <AddHighscore score={this.state.turn} />}
+          {highscoreWorthy && <AddHighscore score={this.state.score} />}
 
         </div>
       </div>
