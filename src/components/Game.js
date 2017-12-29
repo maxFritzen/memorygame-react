@@ -19,7 +19,7 @@ export default class Game extends React.Component {
         score:1,
         username:"test"
       }],
-      highscoreWorthy: true,
+      highscoreWorthy: false,
       isLoading: false
     };
   };
