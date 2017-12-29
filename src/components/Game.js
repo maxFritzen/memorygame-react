@@ -57,11 +57,12 @@ export default class Game extends React.Component {
       clicked: []
     });
   };
-  checkIfHighscore = (score, highscore) => {
-    console.log('checkIfHighscore', score, 'highscore:', highscore);
-    console.log(score >= highscore);
-    const highscoreWorthy = score >= highscore;
-    this.setState({ highscoreWorthy });
+  checkIfHighscore = (score) => {
+    console.log('checkIfHighscore', score);
+    console.log(this.state.highscore[5].score);
+    if ( this.state.highscore[5] === undefined || score >= this.state.highscore[5].score ) {
+        this.setState({ highscoreWorthy: true });
+    };
   };
   correct = () => {
     console.log('correcting');
@@ -75,10 +76,13 @@ export default class Game extends React.Component {
         this.createPattern();
       }
     } else {
-      // set turn to 1
-      console.log(this.state.highscore[this.state.highscore.length -1].score);
-      this.checkIfHighscore(this.state.score, this.state.highscore[this.state.highscore.length -1].score);
-      this.setState ({ turn: 1}, this.createPattern);
+      // set turn and score to 1
+      const score = this.state.score;
+      this.checkIfHighscore(score);
+      this.setState ({
+        turn: 1,
+        score: 0
+      }, this.createPattern);
     }
   };
   handleClick = (id) => {
