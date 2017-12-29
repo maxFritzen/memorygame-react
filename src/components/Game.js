@@ -19,7 +19,7 @@ export default class Game extends React.Component {
         score:1,
         username:"test"
       }],
-      highscoreWorthy: false,
+      highscoreWorthy: true,
       isLoading: false
     };
   };
@@ -59,10 +59,11 @@ export default class Game extends React.Component {
   };
   checkIfHighscore = (score) => {
     console.log('checkIfHighscore', score);
-    console.log(this.state.highscore[5].score);
-    if ( this.state.highscore[5] === undefined || score >= this.state.highscore[5].score ) {
+    if ( this.state.highscore[999] === undefined || score >= this.state.highscore[999].score ) {
         this.setState({ highscoreWorthy: true });
-    };
+    } else {
+      this.setState({ score: 0 });
+    }
   };
   correct = () => {
     console.log('correcting');
@@ -70,18 +71,18 @@ export default class Game extends React.Component {
     const result = this.state.pattern[index] === this.state.clicked[index] ? true : false;
     if (result) {
       if (this.state.clicked.length === this.state.pattern.length) {
-        this.setState((prevState) => {
-          return { score: prevState.score + 1 };
-        });
+        // this.setState((prevState) => {
+        //   return { score: prevState.score + 1 };
+        // });
+        this.setState ({ score: this.state.pattern.length });
         this.createPattern();
       }
     } else {
-      // set turn and score to 1
+      // set turn to 1
       const score = this.state.score;
       this.checkIfHighscore(score);
       this.setState ({
-        turn: 1,
-        score: 0
+        turn: 1
       }, this.createPattern);
     }
   };
@@ -95,6 +96,10 @@ export default class Game extends React.Component {
     this.setState((prevState) => {
       return { turn : prevState.turn + 1 };
     });
+  };
+  startGame = () => {
+    this.createPattern();
+    this.setState({ score: 0 });
   };
   render() {
     if (this.state.isLoading) {
@@ -113,12 +118,12 @@ export default class Game extends React.Component {
           clicked={this.state.clicked}
           onClick={this.handleClick}
         />
-        <button onClick={this.createPattern}>Next turn and new pattern</button>
+        <button onClick={this.startGame}>Play!</button>
         <div>
           <Highscore highscore={this.state.highscore}/>
         </div>
         <div>
-          {highscoreWorthy && <AddHighscore score={this.state.score} />}
+          {highscoreWorthy && <AddHighscore score={this.state.score} highscore={this.state.highscore} />}
 
         </div>
       </div>
