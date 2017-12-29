@@ -32,22 +32,27 @@ export default class AddHighscore extends React.Component {
   handleChange = (e) => {
     // this.setState({value: e.target.value});
     const input = e.target.value;
-    const validName = this.state.usernames.indexOf(input) === -1 && input.length > 0;
-    console.log(validName);
-    this.setState({ validName });
+    // const validName = this.state.usernames.indexOf(input) === -1 && input.length > 0;
+    // console.log(validName);
+
     // console.log(input.length);
-    if (this.state.usernames.indexOf(input) > 1) {
+    if (this.state.usernames.indexOf(input) > -1) {
       this.setState({
         error: 'This name already exists',
-        disabled: true
+        disabled: true,
+        validName: false
       });
     } else if (input.length === 0) {
       this.setState({
         error: 'Enter something atleast',
-        disabled: true
+        disabled: true,
+        validName: false
       });
     } else {
-      this.setState({ disabled: false });
+      this.setState({
+        disabled: false,
+        validName: true
+       });
     }
   };
   render() {
@@ -59,16 +64,12 @@ export default class AddHighscore extends React.Component {
           {!this.state.validName && <p style={{color:'red'}}>{this.state.error}</p>}
           <input
             className="add-highscore__input"
-            type="test"
             name="highscore"
             placeholder="Enter name"
             maxLength="30"
             onChange={this.handleChange}
-
           />
           <button className="button" disabled={this.state.disabled}>Add!</button>
-
-
         </form>
       </div>
     );
