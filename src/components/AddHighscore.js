@@ -13,7 +13,6 @@ export default class AddHighscore extends React.Component {
     };
   }
   componentDidMount() {
-    console.log(this.props.highscore);
     const usernames = this.props.highscore.map((highscore) => {
       return highscore.username;
     });
@@ -21,7 +20,6 @@ export default class AddHighscore extends React.Component {
   };
   handleAddScore = (e) => { //e = event
     //e.preventDefault(); // prevents page refresh.
-    console.log(e.target.elements.highscore.value);
     const username = e.target.elements.highscore.value.trim();
 
     database.ref('highscore').push({
