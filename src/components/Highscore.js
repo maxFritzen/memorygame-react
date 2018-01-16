@@ -40,12 +40,17 @@ export default class Highscore extends React.Component {
       return <LoadingPage />;
     }
     return (
-      <div>
-        <h1>Highscore:
+      <div className="highscore">
+        <div className="highscore__header">
+          <h1>Highscore:</h1>
+        </div>
+        <ul className="highscore__list">
           {this.props.highscore.map((score, index) => {
-            return <li key={score.username}>{`${index + 1} . ${score.username} : ${score.score}`}</li>
+            return <li key={score.username} className="highscore__list-item">{`${index + 1} . ${score.username} : ${score.score}`}</li>
           })}
-        </h1>
+        </ul>
+
+
       </div>
     );
   }

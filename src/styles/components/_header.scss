@@ -1,0 +1,24 @@
+.header {
+  background-color: rgba(154, 33, 161, 0.7);
+}
+
+.header__content {
+  display: flex;
+  justify-content: center;
+  padding: $s-size 0;
+}
+
+.header__primary {
+  color: white;
+  letter-spacing: $s-size / 2;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.header__info {
+
+}

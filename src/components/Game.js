@@ -95,10 +95,10 @@ export default class Game extends React.Component {
     const id = e.target.id;
     console.log('handleClick', id);
     console.log('className:', e.target.className);
-    if (e.target.classList.contains('btn--blink')) {
-      e.target.classList.remove('btn--blink');
+    if (e.target.classList.contains('board__btn--blink')) {
+      e.target.classList.remove('board__btn--blink');
     }
-    e.target.classList.add('btn--blink');
+    e.target.classList.add('board__btn--blink');
     this.setState({
       clicked: [...this.state.clicked, id]
     }, this.correct);
@@ -128,15 +128,15 @@ export default class Game extends React.Component {
   };
   resetClasses = () => {
     this.index = 0;
-    ReactDOM.findDOMNode(this.refs.one).className = ('btn');
-    ReactDOM.findDOMNode(this.refs.two).className = ('btn');
-    ReactDOM.findDOMNode(this.refs.three).className = ('btn');
-    ReactDOM.findDOMNode(this.refs.four).className = ('btn');
-    ReactDOM.findDOMNode(this.refs.five).className = ('btn');
-    ReactDOM.findDOMNode(this.refs.six).className = ('btn');
-    ReactDOM.findDOMNode(this.refs.seven).className = ('btn');
-    ReactDOM.findDOMNode(this.refs.eight).className = ('btn');
-    ReactDOM.findDOMNode(this.refs.nine).className = ('btn');
+    ReactDOM.findDOMNode(this.refs.one).className = ('board__btn');
+    ReactDOM.findDOMNode(this.refs.two).className = ('board__btn');
+    ReactDOM.findDOMNode(this.refs.three).className = ('board__btn');
+    ReactDOM.findDOMNode(this.refs.four).className = ('board__btn');
+    ReactDOM.findDOMNode(this.refs.five).className = ('board__btn');
+    ReactDOM.findDOMNode(this.refs.six).className = ('board__btn');
+    ReactDOM.findDOMNode(this.refs.seven).className = ('board__btn');
+    ReactDOM.findDOMNode(this.refs.eight).className = ('board__btn');
+    ReactDOM.findDOMNode(this.refs.nine).className = ('board__btn');
   };
   displayPattern = () => {
     console.log('this index:', this.index);
@@ -151,79 +151,79 @@ export default class Game extends React.Component {
     const buttonNine = ReactDOM.findDOMNode(this.refs.nine);
 
     if (this.state.pattern[this.index] === 1) {
-      if (buttonOne.classList.contains('btn--blink')) {
+      if (buttonOne.classList.contains('board__btn--blink')) {
         console.log('class should be removed');
-        buttonOne.classList.remove('btn--blink');
-        setTimeout(() => {buttonOne.classList.add('btn--blink');}, 50);
+        buttonOne.classList.remove('board__btn--blink');
+        setTimeout(() => {buttonOne.classList.add('board__btn--blink');}, 50);
       } else {
-        buttonOne.classList.add('btn--blink');
+        buttonOne.classList.add('board__btn--blink');
       }
 
     } else if (this.state.pattern[this.index] === 2) {
-        if (buttonTwo.classList.contains('btn--blink')) {
+        if (buttonTwo.classList.contains('board__btn--blink')) {
           console.log('class should be removed');
-          buttonTwo.classList.remove('btn--blink');
-          setTimeout(() => {buttonTwo.classList.add('btn--blink');}, 50);
+          buttonTwo.classList.remove('board__btn--blink');
+          setTimeout(() => {buttonTwo.classList.add('board__btn--blink');}, 50);
         } else {
-          buttonTwo.classList.add('btn--blink');
+          buttonTwo.classList.add('board__btn--blink');
         }
     } else if (this.state.pattern[this.index] === 3) {
-        if (buttonThree.classList.contains('btn--blink')) {
+        if (buttonThree.classList.contains('board__btn--blink')) {
           console.log('class should be removed');
-          buttonThree.classList.remove('btn--blink');
-          setTimeout(() => {buttonThree.classList.add('btn--blink');}, 50);
+          buttonThree.classList.remove('board__btn--blink');
+          setTimeout(() => {buttonThree.classList.add('board__btn--blink');}, 50);
         } else {
-          buttonThree.classList.add('btn--blink');
+          buttonThree.classList.add('board__btn--blink');
         }
     } else if (this.state.pattern[this.index] === 4) {
-        if (buttonFour.classList.contains('btn--blink')) {
+        if (buttonFour.classList.contains('board__btn--blink')) {
           console.log('class should be removed');
-          buttonFour.classList.remove('btn--blink');
-          setTimeout(() => {buttonFour.classList.add('btn--blink');}, 50);
+          buttonFour.classList.remove('board__btn--blink');
+          setTimeout(() => {buttonFour.classList.add('board__btn--blink');}, 50);
         } else {
-          buttonFour.classList.add('btn--blink');
+          buttonFour.classList.add('board__btn--blink');
         }
     } else if (this.state.pattern[this.index] === 5) {
-        if (buttonFive.classList.contains('btn--blink')) {
+        if (buttonFive.classList.contains('board__btn--blink')) {
           console.log('class should be removed');
-          buttonFive.classList.remove('btn--blink');
-          setTimeout(() => {buttonFive.classList.add('btn--blink');}, 50);
+          buttonFive.classList.remove('board__btn--blink');
+          setTimeout(() => {buttonFive.classList.add('board__btn--blink');}, 50);
         } else {
-          buttonFive.classList.add('btn--blink');
+          buttonFive.classList.add('board__btn--blink');
         }
     } else if (this.state.pattern[this.index] === 6) {
-        if (buttonSix.classList.contains('btn--blink')) {
+        if (buttonSix.classList.contains('board__btn--blink')) {
           console.log('class should be removed');
-          buttonSix.classList.remove('btn--blink');
-          setTimeout(() => {buttonSix.classList.add('btn--blink');}, 50);
+          buttonSix.classList.remove('board__btn--blink');
+          setTimeout(() => {buttonSix.classList.add('board__btn--blink');}, 50);
         } else {
-          buttonSix.classList.add('btn--blink');
+          buttonSix.classList.add('board__btn--blink');
         }
     } else if (this.state.pattern[this.index] === 7) {
-        if (buttonSeven.classList.contains('btn--blink')) {
+        if (buttonSeven.classList.contains('board__btn--blink')) {
           console.log('class should be removed');
-          buttonSeven.classList.remove('btn--blink');
-          setTimeout(() => {buttonSeven.classList.add('btn--blink');}, 50);
+          buttonSeven.classList.remove('board__btn--blink');
+          setTimeout(() => {buttonSeven.classList.add('board__btn--blink');}, 50);
         } else {
-          buttonSeven.classList.add('btn--blink');
+          buttonSeven.classList.add('board__btn--blink');
         }
 
     } else if (this.state.pattern[this.index] === 8) {
-        if (buttonEight.classList.contains('btn--blink')) {
+        if (buttonEight.classList.contains('board__btn--blink')) {
           console.log('class should be removed');
-          buttonEight.classList.remove('btn--blink');
-          setTimeout(() => {buttonEight.classList.add('btn--blink');}, 50);
+          buttonEight.classList.remove('board__btn--blink');
+          setTimeout(() => {buttonEight.classList.add('board__btn--blink');}, 50);
         } else {
-          buttonEight.classList.add('btn--blink');
+          buttonEight.classList.add('board__btn--blink');
         }
 
     } else if (this.state.pattern[this.index] === 9) {
-        if (buttonNine.classList.contains('btn--blink')) {
+        if (buttonNine.classList.contains('board__btn--blink')) {
           console.log('class should be removed');
-          buttonNine.classList.remove('btn--blink');
-          setTimeout(() => {buttonNine.classList.add('btn--blink');}, 50);
+          buttonNine.classList.remove('board__btn--blink');
+          setTimeout(() => {buttonNine.classList.add('board__btn--blink');}, 50);
         } else {
-          buttonNine.classList.add('btn--blink');
+          buttonNine.classList.add('board__btn--blink');
         }
     }
     this.index++;
@@ -237,27 +237,40 @@ export default class Game extends React.Component {
     console.log('pattern:', this.state.pattern);
     return (
 
-      <div>
+      <div className="content-container">
+        <div className="header">
+          <div className="header__content">
+            <div className="header__primary">
+              <h1>Memory Game</h1>
+            </div>
+          </div>
+        </div>
 
-        <p>Score: {this.state.score}</p>
-        <p>Clicked: {this.state.clicked}</p>
+        <div className="score">
+          <p>Score: {this.state.score}</p>
+        </div>
 
-        <div>
-          <button ref="one" id="1" className="btn" onClick={this.handleClick} disabled={this.state.disabled}>1</button>
-          <button ref="two" id="2" className="btn" onClick={this.handleClick} disabled={this.state.disabled}>2</button>
-          <button ref="three" id="3" className="btn" onClick={this.handleClick} disabled={this.state.disabled}>3</button>
+        <div className="board">
+
+          <div>
+            <button ref="one" id="1" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>1</button>
+            <button ref="two" id="2" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>2</button>
+            <button ref="three" id="3" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>3</button>
+          </div>
+          <div>
+            <button ref="four" id="4" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>4</button>
+            <button ref="five" id="5" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>5</button>
+            <button ref="six" id="6" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>6</button>
+          </div>
+          <div>
+            <button ref="seven" id="7" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>7</button>
+            <button ref="eight" id="8" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>8</button>
+            <button ref="nine" id="9" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>9</button>
+          </div>
         </div>
-        <div>
-          <button ref="four" id="4" className="btn" onClick={this.handleClick} disabled={this.state.disabled}>4</button>
-          <button ref="five" id="5" className="btn" onClick={this.handleClick} disabled={this.state.disabled}>5</button>
-          <button ref="six" id="6" className="btn" onClick={this.handleClick} disabled={this.state.disabled}>6</button>
-        </div>
-        <div>
-          <button ref="seven" id="7" className="btn" onClick={this.handleClick} disabled={this.state.disabled}>7</button>
-          <button ref="eight" id="8" className="btn" onClick={this.handleClick} disabled={this.state.disabled}>8</button>
-          <button ref="nine" id="9" className="btn" onClick={this.handleClick} disabled={this.state.disabled}>9</button>
-        </div>
-        <button onClick={this.startGame} disabled={this.state.disabled}>Play!</button>
+
+        <button  className="btn btn__play" onClick={this.startGame} disabled={this.state.disabled}>Play!</button>
+
         <div>
           <Highscore highscore={this.state.highscore}/>
         </div>
