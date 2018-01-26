@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import database from '../firebase/firebase';
+import AddHighscore from './AddHighscore';
 import Highscore from './Highscore';
 import LoadingPage from './LoadingPage';
 
@@ -8,21 +10,44 @@ export default class Game extends React.Component {
     super();
     this.state = {
       disabled: false,
+      turn: 1,
       score: 0,
+      pattern: [],
+      clicked: [],
+      highscore: [{
+        score:1,
+        username:"test"
+      }],
+      highscoreWorthy: false,
       isLoading: false
     };
     this.index = 0;
-    this.turn = 1;
-    this.pattern = [];
-    this.clicked = [];
-    this.score = 0;
-  };
 
+  };
+  componentDidMount() {
+    this.setState({ isLoading: true });
+    const highscore = [];
+    return database.ref('highscore').orderByChild('score')
+      .once('value')
+      .then((snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+          highscore.push({
+            score: childSnapshot.val().score,
+            username: childSnapshot.val().username
+          });
+        });
+        highscore.reverse();
+        this.setState({
+          highscore: highscore,
+          isLoading: false
+        });
+      });
+  };
   createPattern = () => {
     this.setState({disabled: true});
     this.resetClasses();
     let pattern = [];
-    let currentTurn = this.turn;
+    let currentTurn = this.state.turn;
     let length = pattern.length + currentTurn;
     for( let i = 0; i < length; i++ ) {
       const rand = Math.floor(Math.random() * 9 + 1);
@@ -31,54 +56,70 @@ export default class Game extends React.Component {
     }
 
     this.nextTurn();
-    this.pattern = pattern;
-    this.clicked = [];
-    this.intervalId = setInterval(this.startDisplayPattern, 1000);
+    this.setState({
+      pattern: pattern,
+      clicked: []
+    }, () => {
 
+        this.intervalId = setInterval(this.startDisplayPattern, 1000);
+
+    });
   };
-
-
+  checkIfHighscore = (score) => {
+    if ( (this.state.highscore[999] === undefined || score >= this.state.highscore[999].score) && score > 0 ) {
+        this.setState({ highscoreWorthy: true });
+    } else {
+      this.setState({ score: 0 });
+    }
+  };
   correct = () => {
-    let index = this.clicked.length - 1;
-    const result = this.pattern[index] == this.clicked[index] ? true : false;
+    let index = this.state.clicked.length - 1;
+    const result = this.state.pattern[index] == this.state.clicked[index] ? true : false;
 
     if (result) {
-      if (this.clicked.length === this.pattern.length) {
-        this.setState ({ score: this.pattern.length });
+      if (this.state.clicked.length === this.state.pattern.length) {
+        this.setState ({ score: this.state.pattern.length });
         this.createPattern();
       }
     } else {
       // set turn to 1
-      this.score = this.state.score;
-      this.turn = 1;
-      this.createPattern();
+      const score = this.state.score;
+      this.checkIfHighscore(score);
+      this.setState ({
+        turn: 1
+      }, this.createPattern);
     }
   };
 
   handleClick = (e) => {
     const id = e.target.id;
-    this.clicked = [
-      ...this.clicked,
-      id
-    ];
-    this.correct();
+    console.log('handleClick', id);
+    console.log('className:', e.target.className);
+    if (e.target.classList.contains('board__btn--blink')) {
+      e.target.classList.remove('board__btn--blink');
+    }
+    e.target.classList.add('board__btn--blink');
+    this.setState({
+      clicked: [...this.state.clicked, id]
+    }, this.correct);
   };
 
   nextTurn = () => {
-    this.turn = this.turn + 1;
+    this.setState((prevState) => {
+      return { turn : prevState.turn + 1 };
+    });
   };
-
   startGame = () => {
     this.createPattern();
     this.setState({
       score: 0,
       disabled: true
      });
-
+    console.log(ReactDOM.findDOMNode(this.refs.two));
   };
   startDisplayPattern = () => {
 
-    if (this.pattern.length === this.index) {
+    if (this.state.pattern.length === this.index) {
       clearInterval(this.intervalId);
       this.setState({disabled: false});
     } else {
@@ -98,7 +139,7 @@ export default class Game extends React.Component {
     ReactDOM.findDOMNode(this.refs.nine).className = ('board__btn');
   };
   displayPattern = () => {
-    //console.log('this index:', this.index);
+    console.log('this index:', this.index);
     const buttonOne = ReactDOM.findDOMNode(this.refs.one);
     const buttonTwo = ReactDOM.findDOMNode(this.refs.two);
     const buttonThree = ReactDOM.findDOMNode(this.refs.three);
@@ -109,76 +150,76 @@ export default class Game extends React.Component {
     const buttonEight = ReactDOM.findDOMNode(this.refs.eight);
     const buttonNine = ReactDOM.findDOMNode(this.refs.nine);
 
-    if (this.pattern[this.index] === 1) {
+    if (this.state.pattern[this.index] === 1) {
       if (buttonOne.classList.contains('board__btn--blink')) {
-        //console.log('class should be removed');
+        console.log('class should be removed');
         buttonOne.classList.remove('board__btn--blink');
         setTimeout(() => {buttonOne.classList.add('board__btn--blink');}, 50);
       } else {
         buttonOne.classList.add('board__btn--blink');
       }
 
-    } else if (this.pattern[this.index] === 2) {
+    } else if (this.state.pattern[this.index] === 2) {
         if (buttonTwo.classList.contains('board__btn--blink')) {
-          //console.log('class should be removed');
+          console.log('class should be removed');
           buttonTwo.classList.remove('board__btn--blink');
           setTimeout(() => {buttonTwo.classList.add('board__btn--blink');}, 50);
         } else {
           buttonTwo.classList.add('board__btn--blink');
         }
-    } else if (this.pattern[this.index] === 3) {
+    } else if (this.state.pattern[this.index] === 3) {
         if (buttonThree.classList.contains('board__btn--blink')) {
-          //console.log('class should be removed');
+          console.log('class should be removed');
           buttonThree.classList.remove('board__btn--blink');
           setTimeout(() => {buttonThree.classList.add('board__btn--blink');}, 50);
         } else {
           buttonThree.classList.add('board__btn--blink');
         }
-    } else if (this.pattern[this.index] === 4) {
+    } else if (this.state.pattern[this.index] === 4) {
         if (buttonFour.classList.contains('board__btn--blink')) {
-          //console.log('class should be removed');
+          console.log('class should be removed');
           buttonFour.classList.remove('board__btn--blink');
           setTimeout(() => {buttonFour.classList.add('board__btn--blink');}, 50);
         } else {
           buttonFour.classList.add('board__btn--blink');
         }
-    } else if (this.pattern[this.index] === 5) {
+    } else if (this.state.pattern[this.index] === 5) {
         if (buttonFive.classList.contains('board__btn--blink')) {
-          //console.log('class should be removed');
+          console.log('class should be removed');
           buttonFive.classList.remove('board__btn--blink');
           setTimeout(() => {buttonFive.classList.add('board__btn--blink');}, 50);
         } else {
           buttonFive.classList.add('board__btn--blink');
         }
-    } else if (this.pattern[this.index] === 6) {
+    } else if (this.state.pattern[this.index] === 6) {
         if (buttonSix.classList.contains('board__btn--blink')) {
-          //console.log('class should be removed');
+          console.log('class should be removed');
           buttonSix.classList.remove('board__btn--blink');
           setTimeout(() => {buttonSix.classList.add('board__btn--blink');}, 50);
         } else {
           buttonSix.classList.add('board__btn--blink');
         }
-    } else if (this.pattern[this.index] === 7) {
+    } else if (this.state.pattern[this.index] === 7) {
         if (buttonSeven.classList.contains('board__btn--blink')) {
-          //console.log('class should be removed');
+          console.log('class should be removed');
           buttonSeven.classList.remove('board__btn--blink');
           setTimeout(() => {buttonSeven.classList.add('board__btn--blink');}, 50);
         } else {
           buttonSeven.classList.add('board__btn--blink');
         }
 
-    } else if (this.pattern[this.index] === 8) {
+    } else if (this.state.pattern[this.index] === 8) {
         if (buttonEight.classList.contains('board__btn--blink')) {
-          //console.log('class should be removed');
+          console.log('class should be removed');
           buttonEight.classList.remove('board__btn--blink');
           setTimeout(() => {buttonEight.classList.add('board__btn--blink');}, 50);
         } else {
           buttonEight.classList.add('board__btn--blink');
         }
 
-    } else if (this.pattern[this.index] === 9) {
+    } else if (this.state.pattern[this.index] === 9) {
         if (buttonNine.classList.contains('board__btn--blink')) {
-          //console.log('class should be removed');
+          console.log('class should be removed');
           buttonNine.classList.remove('board__btn--blink');
           setTimeout(() => {buttonNine.classList.add('board__btn--blink');}, 50);
         } else {
@@ -192,8 +233,8 @@ export default class Game extends React.Component {
     if (this.state.isLoading) {
       return <LoadingPage />;
     }
-
-    //console.log('pattern:', this.pattern);
+    const highscoreWorthy = this.state.highscoreWorthy;
+    console.log('pattern:', this.state.pattern);
     return (
 
       <div className="container">
@@ -232,11 +273,10 @@ export default class Game extends React.Component {
           </div>
 
           <div className="col-1-of-4">
-            <Highscore
-              highscore={this.state.highscore}
-              score={this.score}
-            />
-
+            <Highscore highscore={this.state.highscore}/>
+            <div>
+              {highscoreWorthy && <AddHighscore score={this.state.score} highscore={this.state.highscore} />}
+            </div>
           </div>
 
         </div>
