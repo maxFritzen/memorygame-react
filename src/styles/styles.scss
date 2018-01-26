@@ -1,8 +1,14 @@
-@import './base/settings';
+@import './abstracts/variables';
+@import './abstracts/mixins';
+
 @import './base/base';
+@import './base/utilities';
+
 @import './components/board';
 @import './components/buttons';
 @import './components/content-container';
 @import './components/header';
 @import './components/score';
 @import './components/highscore';
+
+@import './layout/grid';

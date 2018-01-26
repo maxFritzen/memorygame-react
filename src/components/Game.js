@@ -237,46 +237,54 @@ export default class Game extends React.Component {
     console.log('pattern:', this.state.pattern);
     return (
 
-      <div className="content-container">
-        <div className="header">
-          <div className="header__content">
-            <div className="header__primary">
-              <h1>Memory Game</h1>
+      <div className="container">
+        <div className="row">
+          <div className="header ">
+            <div className="header__content">
+              <div className="header__primary u-margin-bottom-small">
+                <h1>Memory Game</h1>
+              </div>
             </div>
           </div>
         </div>
-
-        <div className="score">
-          <p>Score: {this.state.score}</p>
-        </div>
-
-        <div className="board">
-
-          <div>
-            <button ref="one" id="1" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>1</button>
-            <button ref="two" id="2" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>2</button>
-            <button ref="three" id="3" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>3</button>
-          </div>
-          <div>
-            <button ref="four" id="4" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>4</button>
-            <button ref="five" id="5" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>5</button>
-            <button ref="six" id="6" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>6</button>
-          </div>
-          <div>
-            <button ref="seven" id="7" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>7</button>
-            <button ref="eight" id="8" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>8</button>
-            <button ref="nine" id="9" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>9</button>
+        <div className="row">
+          <div className="score u-margin-bottom-medium">
+              <p className="">Score: {this.state.score}</p>
           </div>
         </div>
+        <div className="row">
+          <div className="col-1-of-4">&nbsp;</div>
+          <div className="col-2-of-4 board">
+            <div className="board__row">
+              <button ref="one" id="1" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>1</button>
+              <button ref="two" id="2" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>2</button>
+              <button ref="three" id="3" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>3</button>
+            </div>
+            <div className="board__row">
+              <button ref="four" id="4" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>4</button>
+              <button ref="five" id="5" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>5</button>
+              <button ref="six" id="6" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>6</button>
+            </div>
+            <div className="board__row">
+              <button ref="seven" id="7" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>7</button>
+              <button ref="eight" id="8" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>8</button>
+              <button ref="nine" id="9" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>9</button>
+            </div>
+          </div>
 
-        <button  className="btn btn__play" onClick={this.startGame} disabled={this.state.disabled}>Play!</button>
+          <div className="col-1-of-4">
+            <Highscore highscore={this.state.highscore}/>
+            <div>
+              {highscoreWorthy && <AddHighscore score={this.state.score} highscore={this.state.highscore} />}
+            </div>
+          </div>
 
-        <div>
-          <Highscore highscore={this.state.highscore}/>
         </div>
-        <div>
-          {highscoreWorthy && <AddHighscore score={this.state.score} highscore={this.state.highscore} />}
+        <div className="row">
+          <button  className="btn btn--play" onClick={this.startGame} disabled={this.state.disabled}>Play!</button>
         </div>
+
+
 
       </div>
     );

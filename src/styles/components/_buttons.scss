@@ -1,12 +1,14 @@
 .btn {
-  background-color: purple;
-  border-radius: 100px;
-}
 
-.btn__play {
-  font-size: $l-size;
-  padding: $m-size $xl-size;
-  margin: 0 auto;
-  display:flex;
-  justify-content: center;
+  border-radius: 100px;
+
+  &--play {
+    background-color: $color-palette-4;
+    color: $color-palette-1;
+    font-size: $l-size;
+    display: block;
+    margin: 0 auto;
+    padding: $m-size $xl-size;
+
+  }
 }

@@ -49,8 +49,6 @@ export default class Highscore extends React.Component {
             return <li key={score.username} className="highscore__list-item">{`${index + 1} . ${score.username} : ${score.score}`}</li>
           })}
         </ul>
-
-
       </div>
     );
   }

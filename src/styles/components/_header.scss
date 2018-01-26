@@ -1,19 +1,18 @@
 .header {
-  background-color: rgba(154, 33, 161, 0.7);
+  text-align: center;
 }
 
 .header__content {
-  display: flex;
-  justify-content: center;
-  padding: $s-size 0;
+
+
 }
 
 .header__primary {
-  color: white;
+  color: $color-palette-5;
   letter-spacing: $s-size / 2;
   text-decoration: none;
   text-transform: uppercase;
-
+  padding: $xl-size 0;
   h1 {
     margin: 0;
   }

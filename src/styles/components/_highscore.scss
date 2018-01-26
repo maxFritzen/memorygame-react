@@ -1,11 +1,26 @@
 .highscore {
-  border:1px solid black;
-}
+  background-color: $color-palette-3;
+  border-radius: 2rem;
+  padding: 3rem;
+  height: $board-height; // height of board. should make a variable or container with this height.
 
-.highscore__list {
-  border:1px solid red;
-}
+  &__header {
+    color: $color-palette-4;
+    text-align: center;
+    padding: $m-size;
+  }
 
-.highscore__list-item {
-  border:1px solid green;
+  &__list {
+    height: 90%;
+    overflow-y: auto;
+    padding: 2rem;
+
+    :nth-child(odd){
+      background-color: darken($color-palette-3, 10);
+    }
+    &-item {
+
+    }
+  }
+
 }
