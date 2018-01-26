@@ -42,7 +42,7 @@ export default class AddHighscore extends React.Component {
       });
     } else if (input.length === 0) {
       this.setState({
-        error: 'Enter something atleast',
+        error: 'Enter something, come on now',
         disabled: true,
         validName: false
       });

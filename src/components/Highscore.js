@@ -35,8 +35,12 @@ export default class Highscore extends React.Component {
   };
 
   checkIfHighscore = (score) => {
+    console.log('checkIfHighscore', score);
     if ( (this.highscore[999] === undefined || score >= this.highscore[999].score) && score > 0 ) {
         this.highscoreWorthy = true;
+    }
+    else {
+      this.highscoreWorthy = false;
     }
 
   };
@@ -44,13 +48,18 @@ export default class Highscore extends React.Component {
     if (this.state.isLoading) {
       return <LoadingPage />;
     }
-    if (this.props.score > 0) {
-      this.checkIfHighscore(this.props.score);
-    }
-    const highscoreWorthy = this.highscoreWorthy;
 
+    if (this.props.score >= 0) {
+      this.checkIfHighscore(this.props.score);
+      console.log('this.props.score: ', this.props.score);
+    }
+    
+    const highscoreWorthy = this.highscoreWorthy;
+    console.log('highscoreWorthy: ', highscoreWorthy);
+    console.log('this.props.score: ', this.props.score);
     return (
       <div>
+
         <div className="highscore">
           <div className="highscore__header">
             <h1>Highscore:</h1>
