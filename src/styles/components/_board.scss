@@ -1,18 +1,20 @@
 .board {
   background-color: $color-palette-3;
   border-radius: 2rem;
-  height: $board-height;
+  height: 60vh;
+
   &__row {
     height: calc(100% / 3);
+    text-align: center;
   }
   &__btn {
     background-color: $color-palette-1;
-    box-shadow: 0 1.5rem 1rem rgba($color-black,.2);
+    box-shadow: 0 .8rem 1rem rgba($color-black,.2);
     border-radius: 2rem;
-
-    font-size: 9rem;
+    color: $color-palette-5;
+    font-size: 7rem;
     //padding: 3rem;
-    margin: 1rem;
+    margin: .1rem;
     height: 90%;
     width: calc((100% - 6rem )/ 3);
 

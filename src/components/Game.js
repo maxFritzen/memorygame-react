@@ -19,11 +19,10 @@ export default class Game extends React.Component {
   };
 
   createPattern = () => {
-    this.setState({disabled: true});
+    this.setState({ disabled: true });
     this.resetClasses();
-    let pattern = [];
-    let currentTurn = this.turn;
-    let length = pattern.length + currentTurn;
+    const pattern = [];
+    const length = pattern.length + this.turn;
     for( let i = 0; i < length; i++ ) {
       const rand = Math.floor(Math.random() * 9 + 1);
       pattern[i] = rand;
@@ -39,7 +38,7 @@ export default class Game extends React.Component {
 
 
   correct = () => {
-    let index = this.clicked.length - 1;
+    const index = this.clicked.length - 1;
     const result = this.pattern[index] == this.clicked[index] ? true : false;
 
     if (result) {
@@ -80,7 +79,7 @@ export default class Game extends React.Component {
 
     if (this.pattern.length === this.index) {
       clearInterval(this.intervalId);
-      this.setState({disabled: false});
+      this.setState({ disabled: false });
     } else {
       this.displayPattern();
     }
@@ -98,7 +97,7 @@ export default class Game extends React.Component {
     ReactDOM.findDOMNode(this.refs.nine).className = ('board__btn');
   };
   displayPattern = () => {
-    //console.log('this index:', this.index);
+
     const buttonOne = ReactDOM.findDOMNode(this.refs.one);
     const buttonTwo = ReactDOM.findDOMNode(this.refs.two);
     const buttonThree = ReactDOM.findDOMNode(this.refs.three);
@@ -111,7 +110,6 @@ export default class Game extends React.Component {
 
     if (this.pattern[this.index] === 1) {
       if (buttonOne.classList.contains('board__btn--blink')) {
-        //console.log('class should be removed');
         buttonOne.classList.remove('board__btn--blink');
         setTimeout(() => {buttonOne.classList.add('board__btn--blink');}, 50);
       } else {
@@ -120,7 +118,6 @@ export default class Game extends React.Component {
 
     } else if (this.pattern[this.index] === 2) {
         if (buttonTwo.classList.contains('board__btn--blink')) {
-          //console.log('class should be removed');
           buttonTwo.classList.remove('board__btn--blink');
           setTimeout(() => {buttonTwo.classList.add('board__btn--blink');}, 50);
         } else {
@@ -128,7 +125,6 @@ export default class Game extends React.Component {
         }
     } else if (this.pattern[this.index] === 3) {
         if (buttonThree.classList.contains('board__btn--blink')) {
-          //console.log('class should be removed');
           buttonThree.classList.remove('board__btn--blink');
           setTimeout(() => {buttonThree.classList.add('board__btn--blink');}, 50);
         } else {
@@ -136,7 +132,6 @@ export default class Game extends React.Component {
         }
     } else if (this.pattern[this.index] === 4) {
         if (buttonFour.classList.contains('board__btn--blink')) {
-          //console.log('class should be removed');
           buttonFour.classList.remove('board__btn--blink');
           setTimeout(() => {buttonFour.classList.add('board__btn--blink');}, 50);
         } else {
@@ -144,7 +139,6 @@ export default class Game extends React.Component {
         }
     } else if (this.pattern[this.index] === 5) {
         if (buttonFive.classList.contains('board__btn--blink')) {
-          //console.log('class should be removed');
           buttonFive.classList.remove('board__btn--blink');
           setTimeout(() => {buttonFive.classList.add('board__btn--blink');}, 50);
         } else {
@@ -152,7 +146,6 @@ export default class Game extends React.Component {
         }
     } else if (this.pattern[this.index] === 6) {
         if (buttonSix.classList.contains('board__btn--blink')) {
-          //console.log('class should be removed');
           buttonSix.classList.remove('board__btn--blink');
           setTimeout(() => {buttonSix.classList.add('board__btn--blink');}, 50);
         } else {
@@ -160,7 +153,6 @@ export default class Game extends React.Component {
         }
     } else if (this.pattern[this.index] === 7) {
         if (buttonSeven.classList.contains('board__btn--blink')) {
-          //console.log('class should be removed');
           buttonSeven.classList.remove('board__btn--blink');
           setTimeout(() => {buttonSeven.classList.add('board__btn--blink');}, 50);
         } else {
@@ -169,7 +161,6 @@ export default class Game extends React.Component {
 
     } else if (this.pattern[this.index] === 8) {
         if (buttonEight.classList.contains('board__btn--blink')) {
-          //console.log('class should be removed');
           buttonEight.classList.remove('board__btn--blink');
           setTimeout(() => {buttonEight.classList.add('board__btn--blink');}, 50);
         } else {
@@ -178,7 +169,6 @@ export default class Game extends React.Component {
 
     } else if (this.pattern[this.index] === 9) {
         if (buttonNine.classList.contains('board__btn--blink')) {
-          //console.log('class should be removed');
           buttonNine.classList.remove('board__btn--blink');
           setTimeout(() => {buttonNine.classList.add('board__btn--blink');}, 50);
         } else {
@@ -188,12 +178,12 @@ export default class Game extends React.Component {
     this.index++;
 
   };
+
   render() {
     if (this.state.isLoading) {
       return <LoadingPage />;
     }
 
-    //console.log('pattern:', this.pattern);
     return (
 
       <div className="container">
@@ -243,8 +233,6 @@ export default class Game extends React.Component {
         <div className="row">
           <button  className="btn btn--play" onClick={this.startGame} disabled={this.state.disabled}>Play!</button>
         </div>
-
-
 
       </div>
     );

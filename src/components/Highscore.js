@@ -46,20 +46,24 @@ export default class Highscore extends React.Component {
   };
   render() {
     if (this.state.isLoading) {
-      return <LoadingPage />;
+      return (
+        <div className="highscore">
+          <LoadingPage />
+        </div>
+
+      );
     }
 
     if (this.props.score >= 0) {
       this.checkIfHighscore(this.props.score);
       console.log('this.props.score: ', this.props.score);
     }
-    
+
     const highscoreWorthy = this.highscoreWorthy;
     console.log('highscoreWorthy: ', highscoreWorthy);
     console.log('this.props.score: ', this.props.score);
     return (
       <div>
-
         <div className="highscore">
           <div className="highscore__header">
             <h1>Highscore:</h1>
