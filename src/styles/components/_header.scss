@@ -1,20 +1,24 @@
 .header {
+  background-color: $color-palette-5;
   text-align: center;
+  height: 15vh;
+
 }
 
 .header__content {
-
+  padding-top: 1.5rem;
 
 }
 
 .header__primary {
-  color: $color-palette-5;
+  color: $color-palette-1;
   letter-spacing: $s-size / 2;
   text-decoration: none;
   text-transform: uppercase;
-  padding: $xl-size 0;
+  padding: 1rem 0;
+
   h1 {
-    margin: 0;
+
   }
 }
 

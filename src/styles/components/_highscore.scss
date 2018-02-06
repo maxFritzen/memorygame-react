@@ -1,9 +1,10 @@
 .highscore {
+  display:none;
   background-color: $color-palette-3;
   border-radius: 2rem;
-  padding: 3rem;
   height: $board-height; // height of board. should make a variable or container with this height.
-
+  padding: 3rem;
+  position: relative;
   &__header {
     color: $color-palette-4;
     text-align: center;

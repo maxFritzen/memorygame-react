@@ -1,6 +1,7 @@
 @import './abstracts/variables';
 @import './abstracts/mixins';
 
+@import './base/animations';
 @import './base/base';
 @import './base/utilities';
 
@@ -10,5 +11,6 @@
 @import './components/header';
 @import './components/score';
 @import './components/highscore';
+@import './components/loader';
 
 @import './layout/grid';
