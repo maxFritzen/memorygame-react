@@ -8,6 +8,7 @@ export default class Game extends React.Component {
     super();
     this.state = {
       disabled: false,
+      showHighscore: false,
       score: 0,
       isLoading: false
     };
@@ -179,31 +180,48 @@ export default class Game extends React.Component {
 
   };
 
+  toggleHighscore = () => {
+    console.log('toggleHighscore', this.state.showHighscore);
+    this.setState({
+      showHighscore: !this.state.showHighscore
+    })
+  }
+
   render() {
     if (this.state.isLoading) {
       return <LoadingPage />;
+    }
+    if (this.state.showHighscore) {
+      return (<div>
+        <p
+          onClick={this.toggleHighscore}
+          className="showHighscore"
+          >Highscore
+        </p>
+        <Highscore
+          highscore={this.state.highscore}
+          score={this.score}
+        />
+      </div>
+
+    );
     }
 
     return (
 
       <div className="container">
-        <div className="row">
-          <div className="header ">
-            <div className="header__content">
-              <div className="header__primary u-margin-bottom-small">
-                <h1>Memory Game</h1>
-              </div>
-            </div>
-          </div>
-        </div>
+        <p
+          onClick={this.toggleHighscore}
+          className="showHighscore"
+          >Highscore
+        </p>
         <div className="row">
           <div className="score u-margin-bottom-medium">
               <p className="">Score: {this.state.score}</p>
           </div>
         </div>
         <div className="row">
-          <div className="col-1-of-4">&nbsp;</div>
-          <div className="col-2-of-4 board">
+          <div className="col-3-of-4 board">
             <div className="board__row">
               <button ref="one" id="1" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>1</button>
               <button ref="two" id="2" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>2</button>
@@ -221,17 +239,13 @@ export default class Game extends React.Component {
             </div>
           </div>
 
-          <div className="col-1-of-4">
-            <Highscore
-              highscore={this.state.highscore}
-              score={this.score}
-            />
-
-          </div>
-
         </div>
-        <div className="row">
+        <div className="u-center-child">
           <button  className="btn btn--play" onClick={this.startGame} disabled={this.state.disabled}>Play!</button>
+        </div>
+        <div>
+
+
         </div>
 
       </div>

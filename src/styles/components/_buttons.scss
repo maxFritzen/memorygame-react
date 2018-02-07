@@ -2,11 +2,12 @@
 
   border-radius: 100px;
   outline: none;
-  transition: all .2s;
+  transition: all;
   overflow: hidden;
   position: relative;
 
   &--play {
+
     background-color: $color-palette-5;
     border:1px solid darken($color-palette-5, 20);
     box-shadow: inset 0 2px 1px lighten($color-palette-5, 20);
@@ -15,8 +16,9 @@
     padding: $m-size $xl-size;
 
     &:active {
-      box-shadow: 0 1rem 2rem rgba($color-black,.2);
-      transform: translateY(-.3rem);
+      box-shadow: inset 0 2px 1px lighten($color-palette-5, 20);
+      color: $color-palette-2;
+      transform: translateY(.3rem);
 
       &::after {
         transform: scaleX(1.4) scaleY(1.6);
@@ -24,26 +26,26 @@
       }
     }
 
-      &:after {
-      content: "";
-      background: $color-white;
-
-      display: block;
-      position: absolute;
-      padding-top: 300%;
-      padding-left: 350%;
-      margin-left: -50px!important;
-      margin-top: -120%;
-      opacity: 0;
-      transition: all 0.8s
-      }
-
-      &:active:after {
-          padding: 0;
-          margin: 0;
-          opacity: 1;
-          transition: 0s
-      }
+      // &:after {
+      // content: "";
+      // background: $color-white;
+      //
+      // display: block;
+      // position: absolute;
+      // padding-top: 300%;
+      // padding-left: 350%;
+      // margin-left: -50px!important;
+      // margin-top: -120%;
+      // opacity: 0;
+      // transition: all 0.8s
+      // }
+      //
+      // &:active:after {
+      //     padding: 0;
+      //     margin: 0;
+      //     opacity: 1;
+      //     transition: 0s
+      // }
 
 
     // &:active {

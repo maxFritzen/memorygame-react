@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/styles.scss';
+import database from './firebase/firebase';
 import Game from './components/Game';
 import LoadingPage from './components/LoadingPage';
-import database from './firebase/firebase';
+import Header from './components/Header';
+
 
 const App = () => (
   <div>
+    <Header />
     <Game />
   </div>
 );
