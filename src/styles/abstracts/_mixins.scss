@@ -35,12 +35,15 @@ ORDER: Base + typograpfy > general layout + grid > page layout > components
 //mobile first:
 
 @mixin respond($breakpoint) {
-  @if $breakpoint == phone {
+  @if $breakpoint == phone-land {
     @media only screen and (min-width: 37.5em) { @content };   //600px
   }
   @if $breakpoint == tab-port {
-    @media only screen and (min-width: 56.25em) { @content };    //900px
+    @media only screen and (min-width: 48em) { @content };    //768px
   }
+  // @if $breakpoint == tab-port {
+  //   @media only screen and (min-width: 56.25em) { @content };    //900px
+  // }
   @if $breakpoint == tab-land {
     @media only screen and (min-width: 75em) { @content };   //1200px
   }

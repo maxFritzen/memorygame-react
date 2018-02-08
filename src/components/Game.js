@@ -1,13 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import database from '../firebase/firebase';
 import Highscore from './Highscore';
 import LoadingPage from './LoadingPage';
+import Nav from './Nav';
+import Header from './Header';
 
 export default class Game extends React.Component {
   constructor() {
     super();
     this.state = {
       disabled: false,
+      newHighScore: false,
       showHighscore: false,
       score: 0,
       isLoading: false
@@ -17,6 +22,27 @@ export default class Game extends React.Component {
     this.pattern = [];
     this.clicked = [];
     this.score = 0;
+    this.highscore = [];
+  };
+
+  componentDidMount() {
+    this.setState({ isLoading: true });
+    const highscore = [];
+    return database.ref('highscore').orderByChild('score')
+      .once('value')
+      .then((snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+          highscore.push({
+            score: childSnapshot.val().score,
+            username: childSnapshot.val().username
+          });
+        });
+        highscore.reverse();
+        this.highscore = highscore;
+        this.setState({
+          isLoading: false
+        });
+      });
   };
 
   createPattern = () => {
@@ -37,6 +63,16 @@ export default class Game extends React.Component {
 
   };
 
+  checkIfHighscore = (score) => {
+    console.log('checkIfHighscore', score);
+    if ( (this.highscore[999] === undefined || score >= this.highscore[999].score) && score > 0 ) {
+      this.setState({ newHighScore: true });
+      console.log('new high score!');
+    }
+    else {
+      //inget nytt highscore. Bör reseta newHighscore till false. vart?
+    }
+  };
 
   correct = () => {
     const index = this.clicked.length - 1;
@@ -48,7 +84,12 @@ export default class Game extends React.Component {
         this.createPattern();
       }
     } else {
-      // set turn to 1
+      // set turn to 1.
+      // check if highscore
+      if (this.state.score >= 0) {
+        this.checkIfHighscore(this.state.score);
+        console.log('this.state.score: ', this.state.score);
+      }
       this.score = this.state.score;
       this.turn = 1;
       this.createPattern();
@@ -191,37 +232,41 @@ export default class Game extends React.Component {
     if (this.state.isLoading) {
       return <LoadingPage />;
     }
-    if (this.state.showHighscore) {
-      return (<div>
-        <p
-          onClick={this.toggleHighscore}
-          className="showHighscore"
-          >Highscore
-        </p>
-        <Highscore
-          highscore={this.state.highscore}
-          score={this.score}
-        />
-      </div>
 
-    );
+    if (this.state.showHighscore) {
+      return (
+        <div>
+          <Nav
+            onClick={this.toggleHighscore}
+            title='Back'
+          />
+          <Highscore
+            highscore={this.highscore}
+            score={this.score} // ska denna vara this.state.score ?
+            newHighScore={this.state.newHighScore}
+          />
+        </div>
+      );
     }
 
     return (
 
-      <div className="container">
-        <p
-          onClick={this.toggleHighscore}
-          className="showHighscore"
-          >Highscore
-        </p>
-        <div className="row">
-          <div className="score u-margin-bottom-medium">
-              <p className="">Score: {this.state.score}</p>
+      <div className="game">
+
+          <div className="score">
+            <ul>
+              <li className="score__highscore">
+                <Nav
+                onClick={this.toggleHighscore}
+                title='Highscore'
+                newHighScore={this.state.newHighScore}
+                />
+              </li>
+              <li className="score__currentScore">Score: {this.state.score}</li>
+            </ul>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-3-of-4 board">
+
+          <div className="board">
             <div className="board__row">
               <button ref="one" id="1" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>1</button>
               <button ref="two" id="2" className="board__btn" onClick={this.handleClick} disabled={this.state.disabled}>2</button>
@@ -239,7 +284,6 @@ export default class Game extends React.Component {
             </div>
           </div>
 
-        </div>
         <div className="u-center-child">
           <button  className="btn btn--play" onClick={this.startGame} disabled={this.state.disabled}>Play!</button>
         </div>

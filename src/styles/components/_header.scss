@@ -1,24 +1,30 @@
 .header {
   background-color: $color-palette-5;
   text-align: center;
-  height: 15vh;
+  padding:1rem;
+  // height: 10vh;
 
 }
 
 .header__content {
-  padding-top: 1.5rem;
+
 
 }
 
 .header__primary {
   color: $color-palette-1;
-  letter-spacing: $s-size / 2;
+  // letter-spacing: $s-size / 2;
+  // line-height: 3rem;
+  // @media screen and (min-width: 480px) {
+  //   line-height:0;
+  // }
   text-decoration: none;
   text-transform: uppercase;
   padding: 1rem 0;
-
+  @include respond(tab-port) {
+    letter-spacing: 2rem;
+  }
   h1 {
-
   }
 }
 
