@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files (x86)\nodejs\node.exe C:\Users\MAAX\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js version
+  C:\Program Files (x86)\nodejs\node.exe C:\Users\MAAX\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
 
 PATH: 
   C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files (x86)\GtkSharp\2.12\bin;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\WINDOWS\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files (x86)\Brackets\command;C:\Program Files (x86)\nodejs\;C:\Users\MAAX\AppData\Local\Microsoft\WindowsApps;C:\Users\MAAX\AppData\Local\atom\bin;C:\Program Files (x86)\Heroku\bin;C:\Program Files\Heroku\bin;C:\Users\MAAX\AppData\Local\Microsoft\WindowsApps;C:\Users\MAAX\AppData\Roaming\npm
@@ -16,7 +16,7 @@ Platform:
 npm manifest: 
   {
     "name": "memorygame",
-    "version": "1.0.0",
+    "version": "1.3.2",
     "main": "index.js",
     "license": "MIT",
     "scripts": {
@@ -33,26 +33,31 @@ npm manifest:
       "babel-plugin-transform-class-properties": "6.24.1",
       "babel-preset-env": "1.5.2",
       "babel-preset-react": "6.24.1",
+      "browserslist": "^2.11.3",
       "css-loader": "0.28.4",
       "extract-text-webpack-plugin": "3.0.0",
       "firebase": "^4.8.0",
       "live-server": "^1.2.0",
       "node-sass": "4.5.3",
+      "postcss": "^6.0.17",
       "react": "16",
       "react-dom": "16",
       "react-modal": "^3.1.8",
       "sass-loader": "6.0.6",
       "style-loader": "0.18.2",
       "validator": "8.0.0",
-      "webpack": "3.1.0",
-      "webpack-dev-server": "2.5.1"
+      "webpack": "3.1.0"
     },
     "devDependencies": {
       "dotenv": "4.0.0",
       "postcss-loader": "^2.1.0",
       "react-test-renderer": "16.0.0",
       "webpack-dev-server": "2.5.1"
-    }
+    },
+    "browserslist": [
+      "> 1%",
+      "last 2 versions"
+    ],
   }
 
 yarn manifest: 
@@ -1144,6 +1149,13 @@ Lockfile:
       caniuse-lite "^1.0.30000718"
       electron-to-chromium "^1.3.18"
   
+  browserslist@^2.11.3:
+    version "2.11.3"
+    resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-2.11.3.tgz#fe36167aed1bbcde4827ebfe71347a2cc70b99b2"
+    dependencies:
+      caniuse-lite "^1.0.30000792"
+      electron-to-chromium "^1.3.30"
+  
   buffer-indexof@^1.0.0:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/buffer-indexof/-/buffer-indexof-1.1.1.tgz#52fabcc6a606d1a00302802648ef68f639da268c"
@@ -1213,6 +1225,10 @@ Lockfile:
   caniuse-lite@^1.0.30000718:
     version "1.0.30000738"
     resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000738.tgz#1820c3c9adb9a117e311a5bdca1d25bc34288eba"
+  
+  caniuse-lite@^1.0.30000792:
+    version "1.0.30000805"
+    resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000805.tgz#83a5f21ead01486e67bccca6fae5dca7cde496de"
   
   caseless@~0.12.0:
     version "0.12.0"
@@ -1764,6 +1780,10 @@ Lockfile:
   electron-to-chromium@^1.3.18:
     version "1.3.22"
     resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.22.tgz#4322d52c151406e3eaef74ad02676883e8416418"
+  
+  electron-to-chromium@^1.3.30:
+    version "1.3.33"
+    resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.33.tgz#bf00703d62a7c65238136578c352d6c5c042a545"
   
   elliptic@^6.0.0:
     version "6.4.0"
@@ -3823,7 +3843,7 @@ Lockfile:
       source-map "^0.5.6"
       supports-color "^3.2.3"
   
-  postcss@^6.0.0:
+  postcss@^6.0.0, postcss@^6.0.17:
     version "6.0.17"
     resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.17.tgz#e259a051ca513f81e9afd0c21f7f82eda50c65c5"
     dependencies:
@@ -5106,14 +5126,10 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: canceled
-      at Interface.<anonymous> (C:\Users\MAAX\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:119877:13)
-      at emitNone (events.js:106:13)
-      at Interface.emit (events.js:208:7)
-      at Interface._ttyWrite (readline.js:775:16)
-      at ReadStream.onkeypress (readline.js:160:10)
-      at emitTwo (events.js:126:13)
-      at ReadStream.emit (events.js:214:7)
-      at emitKeys (internal/readline.js:420:14)
-      at emitKeys.next (<anonymous>)
-      at ReadStream.onData (readline.js:1011:36)
+  SyntaxError: C:\Users\MAAX\Desktop\Egna_React_Projekt\memoryGame\package.json: Unexpected token } in JSON at position 1143
+      at JSON.parse (<anonymous>)
+      at C:\Users\MAAX\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:764:59
+      at Generator.next (<anonymous>)
+      at step (C:\Users\MAAX\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:92:30)
+      at C:\Users\MAAX\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:103:13
+      at <anonymous>
