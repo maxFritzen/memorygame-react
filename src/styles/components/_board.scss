@@ -26,7 +26,8 @@
     }
 
     &--blink{
-      animation: pattern .6s ease-in;
+      animation: pattern .6s ease-out;
+      box-shadow: none;
 
     }
   }
@@ -37,7 +38,7 @@
     //   background-image:
     //     radial-gradient(
     //       ellipse,
-    //       $color-palette-5 10%,
+    //       $color-palette-5 30%,
     //       $color-palette-1 90%
     //   );
     //   color: $color-palette-2;
@@ -103,16 +104,16 @@
       background-image:
         radial-gradient(
           ellipse,
-          $color-palette-5 60%,
+          $color-palette-5 65%,
           $color-palette-1 90%
       );
       color: $color-palette-2;
-
+     }
 
       // background-color: $color-palette-5;
       // box-shadow: 0 .5rem 1rem rgba($color-black,.2);
       // -webkit-filter:none; /* Safari 6.0 - 9.0 */
       // filter: none;
-    }
+
 
 }

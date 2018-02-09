@@ -1,0 +1,36 @@
+.form {
+  text-align: center;
+  &__input {
+    background-color: $color-palette-1;
+    color: $color-black;
+    outline: none;
+    padding: .5rem;
+    &:focus {
+      background-color: lighten($color-palette-4, 20%);
+      font-size: 100%;
+    }
+  }
+  &__submit-button {
+    font-size: $m-size;
+    padding: .3rem 1rem;
+    background-color: $color-palette-5;
+    border:1px solid darken($color-palette-5, 20);
+    box-shadow: inset 0 2px 1px lighten($color-palette-5, 20);
+    color: $color-palette-1;
+
+    &:disabled {
+      border: none;
+      box-shadow: none;
+      color: darken($color-palette-1, 15);
+      opacity: .8;
+    }
+  }
+  &__error-message {
+    color: red;
+    margin-left: -2.4rem;
+  }
+}
+
+.add-highscore {
+  color:green;
+}

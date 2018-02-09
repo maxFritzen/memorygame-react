@@ -9,7 +9,9 @@ export default class AddHighscore extends React.Component {
       usernames: [''],
       validName: true,
       disabled: true,
-      error: ''
+      error: '',
+      addedUsername: '',
+      showForm: true
     };
   }
   componentDidMount() {
@@ -19,13 +21,16 @@ export default class AddHighscore extends React.Component {
     this.setState({ usernames: usernames })
   };
   handleAddScore = (e) => { //e = event
-    //e.preventDefault(); // prevents page refresh.
+    e.preventDefault(); // prevents page refresh.
     const username = e.target.elements.highscore.value.trim();
 
     database.ref('highscore').push({
       score: this.props.score,
       username: username
-    });
+    }, this.setState ({
+      addedUsername: username,
+      showForm: false
+    }));
   };
   handleChange = (e) => {
     // this.setState({value: e.target.value});
@@ -54,20 +59,26 @@ export default class AddHighscore extends React.Component {
     }
   };
   render() {
+    if (!this.state.showForm) {
+      return <p>Added name: {this.state.addedUsername}</p>;
+    }
 
     return (
-      <div>
+      <div className="add-highscore">
+
         <p>You're in the top 100, with a score of {this.props.score}! Add your name below and make history!</p>
-        <form className="add-highscore" onSubmit={this.handleAddScore}>
-          {!this.state.validName && <p style={{color:'red'}}>{this.state.error}</p>}
+        <form className="form" onSubmit={this.handleAddScore}>
+
           <input
-            className="add-highscore__input"
+            className="form__input"
             name="highscore"
             placeholder="Enter name"
             maxLength="30"
             onChange={this.handleChange}
           />
-          <button className="button" disabled={this.state.disabled}>Add!</button>
+
+          <button className="btn form__submit-button" disabled={this.state.disabled}>Add!</button>
+            {!this.state.validName && <p className="form__error-message">{this.state.error}</p>}
         </form>
       </div>
     );

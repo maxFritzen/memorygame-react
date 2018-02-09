@@ -20,6 +20,7 @@
   }
   &__highscore {
     color: blue;
+    font-size: $m-size;
     margin-left: .5rem;
     text-decoration: underline;
     transition: all .2s;
@@ -32,7 +33,12 @@
     }
     &:active {
       color: $color-palette-2;
-      transform: translateX(.5rem);
+      //transform: translateX(.5rem);
+    }
+    &:hover {
+      cursor: pointer;
+      color: darken(blue, 10%);
+      transform: translateX(.2rem);
     }
   }
   @include respond(tab-port) {

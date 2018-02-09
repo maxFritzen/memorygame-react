@@ -68,21 +68,19 @@ export default class Highscore extends React.Component {
     console.log('this.props.score: ', this.props.score);
     console.log('this.props.highscore: ', this.props.highscore);
     return (
-      <div>
         <div className="highscore">
           <div className="highscore__header">
             <h1>Highscore:</h1>
+            {newHighScore && <AddHighscore score={this.props.score} highscore={this.props.highscore} />}
           </div>
+
           <ul className="highscore__list">
 
             {this.props.highscore.map((object, index) => {
               return <li key={object.username} className="highscore__list-item">{`${index + 1} . ${object.username} : ${object.score}`}</li>
             })}
           </ul>
-        </div>
-        <div>
-          {newHighScore && <AddHighscore score={this.props.score} highscore={this.props.highscore} />}
-        </div>
+
       </div>
 
     );
