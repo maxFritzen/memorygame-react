@@ -36,9 +36,12 @@ module.exports = (env) => {
               }
             },
             {
-              loader: 'postcss-loader'
-              // options: {
-              //   sourceMap: true
+              loader: 'postcss-loader',
+
+
+              options: {
+                sourceMap: true
+              }
                 // plugins: function() {
                 //                 return [
                 //                     require('autoprefixer')
@@ -47,7 +50,7 @@ module.exports = (env) => {
                 // config: {
                 //   path: 'postcss.config.js'
                 // }
-              }
+
             },
             {
               loader: 'sass-loader',
