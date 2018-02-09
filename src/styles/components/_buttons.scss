@@ -7,12 +7,13 @@
   position: relative;
 
   &--play {
-
+    backface-visibility: hidden;
     background-color: $color-palette-5;
     border:1px solid darken($color-palette-5, 20);
     box-shadow: inset 0 2px 1px lighten($color-palette-5, 20);
     color: $color-palette-1;
     font-size: $l-size;
+    letter-spacing: .2rem;
     padding: $m-size $xl-size;
 
 

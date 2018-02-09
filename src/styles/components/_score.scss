@@ -1,6 +1,6 @@
 .score {
   font-size: $m-size;
-
+  letter-spacing: .2rem;
   ul {
     position: relative;
 
@@ -19,6 +19,7 @@
     }
   }
   &__highscore {
+    backface-visibility: hidden;
     color: blue;
     font-size: $m-size;
     margin-left: .5rem;
