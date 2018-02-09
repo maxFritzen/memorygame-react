@@ -38,8 +38,8 @@ module.exports = (env) => {
             {
               loader: 'postcss-loader',
               options: {
-                
-                config {
+                sourceMap: true,
+                config: {
                   path: 'postcss.config.js'
                 }
               }
