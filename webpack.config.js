@@ -39,9 +39,14 @@ module.exports = (env) => {
               loader: 'postcss-loader',
               options: {
                 sourceMap: true,
-                config: {
-                  path: 'postcss.config.js'
-                }
+                plugins: function() {
+                                return [
+                                    require('autoprefixer')
+                                ]
+                              }
+                // config: {
+                //   path: 'postcss.config.js'
+                // }
               }
             },
             {
