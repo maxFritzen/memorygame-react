@@ -22,28 +22,29 @@ export default class Game extends React.Component {
     this.turn = 1;
     this.pattern = [];
     this.clicked = [];
-    this.score = 0;
     this.highscore = [];
   };
 
   componentDidMount() {
-    this.setState({ isLoading: true });
-    const highscore = [];
-    return database.ref('highscore').orderByChild('score')
-      .once('value')
-      .then((snapshot) => {
-        snapshot.forEach((childSnapshot) => {
-          highscore.push({
-            score: childSnapshot.val().score,
-            username: childSnapshot.val().username
+
+      this.setState({ isLoading: true });
+      const highscore = [];
+      return database.ref('highscore').orderByChild('score')
+        .once('value')
+        .then((snapshot) => {
+          snapshot.forEach((childSnapshot) => {
+            highscore.push({
+              score: childSnapshot.val().score,
+              username: childSnapshot.val().username
+            });
+          });
+
+          highscore.reverse();
+          this.highscore = highscore;
+          this.setState({
+            isLoading: false
           });
         });
-        highscore.reverse();
-        this.highscore = highscore;
-        this.setState({
-          isLoading: false
-        });
-      });
   };
 
   createPattern = () => {
@@ -65,16 +66,11 @@ export default class Game extends React.Component {
   };
 
   checkIfHighscore = (score) => {
-    console.log('checkIfHighscore', score);
     if ( (this.highscore[999] === undefined || score >= this.highscore[999].score) && score > 0 ) {
       this.setState({
         newHighScore: true,
         alert: true
       });
-      console.log('new high score!');
-    }
-    else {
-      //inget nytt highscore. Bör reseta newHighscore till false. vart?
     }
   };
 
@@ -92,9 +88,7 @@ export default class Game extends React.Component {
       // check if highscore
       if (this.state.score >= 0) {
         this.checkIfHighscore(this.state.score);
-        console.log('this.state.score: ', this.state.score);
       }
-      this.score = this.state.score;
       this.turn = 1;
       this.createPattern();
     }
@@ -132,15 +126,15 @@ export default class Game extends React.Component {
   };
   resetClasses = () => {
     this.index = 0;
-    ReactDOM.findDOMNode(this.refs.one).className = ('board__btn');
-    ReactDOM.findDOMNode(this.refs.two).className = ('board__btn');
-    ReactDOM.findDOMNode(this.refs.three).className = ('board__btn');
-    ReactDOM.findDOMNode(this.refs.four).className = ('board__btn');
-    ReactDOM.findDOMNode(this.refs.five).className = ('board__btn');
-    ReactDOM.findDOMNode(this.refs.six).className = ('board__btn');
-    ReactDOM.findDOMNode(this.refs.seven).className = ('board__btn');
-    ReactDOM.findDOMNode(this.refs.eight).className = ('board__btn');
-    ReactDOM.findDOMNode(this.refs.nine).className = ('board__btn');
+    this.refs.one.className = ('board__btn');
+    this.refs.two.className = ('board__btn');
+    this.refs.three.className = ('board__btn');
+    this.refs.four.className = ('board__btn');
+    this.refs.five.className = ('board__btn');
+    this.refs.six.className = ('board__btn');
+    this.refs.seven.className = ('board__btn');
+    this.refs.eight.className = ('board__btn');
+    this.refs.nine.className = ('board__btn');
   };
   displayPattern = () => {
   if(!this.state.showHighscore) {
@@ -153,15 +147,6 @@ export default class Game extends React.Component {
     const buttonSeven = this.refs.seven;
     const buttonEight = this.refs.eight;
     const buttonNine = this.refs.nine;
-    // const buttonOne = ReactDOM.findDOMNode(this.refs.one);
-    // const buttonTwo = ReactDOM.findDOMNode(this.refs.two);
-    // const buttonThree = ReactDOM.findDOMNode(this.refs.three);
-    // const buttonFour = ReactDOM.findDOMNode(this.refs.four);
-    // const buttonFive = ReactDOM.findDOMNode(this.refs.five);
-    // const buttonSix = ReactDOM.findDOMNode(this.refs.six);
-    // const buttonSeven = ReactDOM.findDOMNode(this.refs.seven);
-    // const buttonEight = ReactDOM.findDOMNode(this.refs.eight);
-    // const buttonNine = ReactDOM.findDOMNode(this.refs.nine);
 
     if (this.pattern[this.index] === 1) {
       if (buttonOne.classList.contains('board__btn--blink')) {
@@ -235,11 +220,10 @@ export default class Game extends React.Component {
   };
 
   toggleHighscore = () => {
-    console.log('toggleHighscore', this.state.showHighscore);
     this.setState({
       showHighscore: !this.state.showHighscore,
     });
-    // If alert is true and highscore has been shown.
+    // If alert is true and highscore has been shown, dont show alert.
     if (this.state.alert && !this.state.showHighscore) {
       this.setState({
         alert: false
@@ -263,7 +247,7 @@ export default class Game extends React.Component {
           />
           <Highscore
             highscore={this.highscore}
-            score={this.score} // ska denna vara this.state.score ?
+            score={this.state.score} // ska denna vara this.state.score ?
             newHighScore={this.state.newHighScore}
           />
         </div>
