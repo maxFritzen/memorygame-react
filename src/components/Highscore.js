@@ -17,18 +17,17 @@ export default class Highscore extends React.Component {
   componentDidMount() {
     this.setState({ isLoading: true });
     const highscore = [];
-    const ref = database.ref('highscore').orderByChild('score')
-      .on('child_added', (snapshot) => {
-        highscore.push({
-          score: snapshot.val().score,
-          username: snapshot.val().username
-        });
-        this.setState({
-          list: highscore,
-          isLoading: false
-        });
+    const ref = database.ref('highscore');
+    ref.on('child_added', (snapshot) => {
+      highscore.push({
+        score: snapshot.val().score,
+        username: snapshot.val().username
       });
-
+      this.setState({
+        list: highscore,
+        isLoading: false
+      });
+    });
   };
 
   render() {
@@ -41,12 +40,13 @@ export default class Highscore extends React.Component {
     }
 
     const highscore = this.state.list;
+    // Sort highscore, descending order.
     if (highscore[0]) {
-      if (highscore[0].score < highscore[highscore.length - 1].score) {
-        highscore.reverse();
-      }
+      highscore.sort((a, b) => b.score - a.score);
+      // highscore.sort(function(a, b) {
+      //   return b.score - a.score;
+      // });
     }
-
 
     const newHighScore = this.props.newHighScore;
 
