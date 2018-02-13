@@ -247,7 +247,7 @@ export default class Game extends React.Component {
           />
           <Highscore
             highscore={this.highscore}
-            score={this.state.score} // ska denna vara this.state.score ?
+            score={this.state.score}
             newHighScore={this.state.newHighScore}
           />
         </div>

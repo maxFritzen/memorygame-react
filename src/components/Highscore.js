@@ -48,13 +48,14 @@ export default class Highscore extends React.Component {
       // });
     }
 
-    const newHighScore = this.props.newHighScore;
+    //const newHighScore = this.props.newHighScore;
+    const newHighScore = true;
 
     return (
         <div className="highscore">
           <div className="highscore__header">
             <h1>Highscore:</h1>
-            {newHighScore && <AddHighscore score={this.props.score} highscore={this.props.highscore} />}
+            {newHighScore && <AddHighscore score={this.props.score} highscore={this.state.list} />}
           </div>
 
           <ul className="highscore__list">

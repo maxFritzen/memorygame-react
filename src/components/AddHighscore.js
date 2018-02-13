@@ -11,7 +11,8 @@ export default class AddHighscore extends React.Component {
       disabled: true,
       error: '',
       addedUsername: '',
-      showForm: true
+      showForm: true,
+      value: ''
     };
   }
   componentDidMount() {
@@ -20,7 +21,7 @@ export default class AddHighscore extends React.Component {
     });
     this.setState({ usernames: usernames })
   };
-  handleAddScore = (e) => { //e = event
+  handleAddScore = (e) => {
     e.preventDefault(); // prevents page refresh.
     const username = e.target.elements.highscore.value.trim();
 
@@ -33,12 +34,10 @@ export default class AddHighscore extends React.Component {
     }));
   };
   handleChange = (e) => {
-    // this.setState({value: e.target.value});
+    this.setState({value: e.target.value});
     const input = e.target.value;
     // const validName = this.state.usernames.indexOf(input) === -1 && input.length > 0;
-    // console.log(validName);
 
-    // console.log(input.length);
     if (this.state.usernames.indexOf(input) > -1) {
       this.setState({
         error: 'This name already exists',
@@ -65,11 +64,11 @@ export default class AddHighscore extends React.Component {
 
     return (
       <div className="add-highscore">
-
         <p>You're in the top 100, with a score of {this.props.score}! Add your name below and make history!</p>
         <form className="form" onSubmit={this.handleAddScore}>
 
           <input
+            value={this.state.value}
             className="form__input"
             name="highscore"
             placeholder="Enter name"
