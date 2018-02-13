@@ -48,8 +48,8 @@ export default class Highscore extends React.Component {
       // });
     }
 
-    //const newHighScore = this.props.newHighScore;
-    const newHighScore = true;
+    const newHighScore = this.props.newHighScore;
+    //const newHighScore = true;
 
     return (
         <div className="highscore">
