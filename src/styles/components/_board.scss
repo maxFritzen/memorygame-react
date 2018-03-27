@@ -8,11 +8,13 @@
     text-align: center;
   }
   &__btn {
-    background-color: $color-palette-1;
+    // background-color: $color-palette-1;
+    background-color: $color-palette-5;
+    border: none;
 
     box-shadow: 0 .8rem 1rem rgba($color-black,.2);
     border-radius: 2rem;
-    color: $color-palette-5;
+    color: $color-palette-1;
     font-size: 6rem;
     line-height: 0;
     margin: .1rem;
@@ -26,10 +28,21 @@
     }
 
     &--blink{
-      animation: pattern .6s ease-out;
+      animation: pattern2 .6s ease-in-out;
+      // animation: pattern2 .6s ease-out;
       box-shadow: none;
 
     }
+  }
+}
+
+@keyframes pattern2 {
+  from {
+    background-color: $color-palette-1;
+  }
+  to {
+    background-color: $color-palette-5;
+    color: $color-palette-2;
   }
 }
 
